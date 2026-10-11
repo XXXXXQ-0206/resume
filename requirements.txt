@@ -1,1 +1,1 @@
-pypdfium2>=4.30
+pypdfium2>=5.14.0
