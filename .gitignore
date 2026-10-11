@@ -1,0 +1,15 @@
+# Compiled PDFs are attached to GitHub Releases instead of being committed
+resume-cn-submit.pdf
+resume-en-submit.pdf
+resume-cn-post.pdf
+resume-en-post.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
