@@ -1,4 +1,4 @@
-PDF := resume-demo.pdf
+PDF := resume.pdf
 SOURCES := resume-cn.typ chicv.typ fontawesome.typ 证件照-黑.jpg fonts/FontAwesome6.otf
 
 .PHONY: all clean check-fonts

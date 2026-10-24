@@ -5,7 +5,7 @@
 .DESCRIPTION
     Builds or cleans the resume and validates its required fonts:
 
-        resume-demo.pdf      <- resume-cn.typ, chicv.typ, fontawesome.typ,
+        resume.pdf           <- resume-cn.typ, chicv.typ, fontawesome.typ,
                                 portrait, and bundled fonts
 
 .EXAMPLE
@@ -21,7 +21,7 @@ $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 
 $Targets = @(
-    @{ Output = 'resume-demo.pdf'; Source = 'resume-cn.typ' }
+    @{ Output = 'resume.pdf'; Source = 'resume-cn.typ' }
 )
 $RequiredFonts = @(
     'SimSun'
