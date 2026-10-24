@@ -1,10 +1,8 @@
-// Based on ice1000/resume (https://github.com/ice1000/resume), licensed under AGPL-3.0.
-// Adapted for the resume-demo sample repository.
 #import "fontawesome.typ": *
 
 #let chiline() = {
     v(-8pt);
-    line(length: 100%, stroke: gray);
+    line(length: 100%, stroke: (paint: gray, thickness: 0.6pt));
     v(-8pt)
 }
 
@@ -29,13 +27,15 @@
         } else {
             link("https://github.com/" + user_repo)[#label]
         }
+    } else if icon {
+        [#fa[#github] #user_repo]
     } else {
-        [#fa[#icon] #user_repo]
+        user_repo
     }
 }
 
 #let cventry(
-    tl: lorem(2),
+    tl: "",
     tr: "",
     bl: "",
     br: "",
@@ -60,23 +60,6 @@
             linebreak() + content
         }
     )
-}
-
-#let redact(alter: none, mark: false, color: black, body) = {
-    let level = sys.inputs.at("level", default: none);
-    if level == "submit" {
-        body
-    } else if level == "post" {
-        if alter == none and mark {
-            box(hide(body), fill: color)
-        } else if alter == none and not mark {
-            box(fill: color)[(missing)]
-        } else {
-            alter
-        }
-    } else {
-        box(fill: color)[(missing)]
-    }
 }
 
 #let chicv(body) = {
@@ -110,7 +93,6 @@
     )
     set list(marker: ([•], [‣]), spacing: 0.95em)
 
-    show link: it => underline(offset: 1.8pt, it)
     set page(margin: (x: 0.6cm, top: 1cm, bottom: 0cm))
     set par(justify: true, leading: 0.86em)
     set text(font: body-fonts, size: 10pt)

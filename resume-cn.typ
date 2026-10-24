@@ -1,21 +1,31 @@
-// 演示用虚构数据（Fictional sample data）——详见 README。
-// Based on ice1000/resume (https://github.com/ice1000/resume), AGPL-3.0.
 #import "chicv.typ": *
 
 #show: chicv
-#set par(justify: true, leading: 0.74em)
+#set document(
+  title: "张三简历（虚构示例）",
+  author: "张三（虚构）",
+)
+#set text(lang: "zh", region: "CN")
+#set par(justify: true, leading: 0.72em)
+#set list(spacing: 0.9em)
 
 
-= #text(font: ("SimSun", "FangSong", "STFangsong"))[张三]
+= #text(font: ("SimSun", "FangSong", "STFangsong"))[张三（示例）]
 
   #fa[#phone] 138-0000-0000 |
   #fa[#envelope] zhangsan\@example.com |
-  #fa[#github] #link("https://github.com/zhangsan")[github.com/zhangsan] #linebreak()
-  出生日期：2004 年 1 月 1 日 |
-  政治面貌：共青团员
+  #fa[#github] #link("https://github.com/your-name")[github.com/your-name] #linebreak()
+  出生日期：2004 年 1 月 1 日（虚构） |
+  政治面貌：共青团员（虚构）
 
   #place(top + right, dx: -0.1cm, dy: 0.45cm)[
-    #std.image("photo.jpg", width: 2.9cm, height: 3.8cm, fit: "cover")
+    #std.image(
+      "证件照-黑.jpg",
+      width: 2.9cm,
+      height: 3.8cm,
+      fit: "cover",
+      alt: "虚构人物的示例证件照",
+    )
   ]
 
   #grid(
@@ -30,115 +40,84 @@
       )[#fa[#graduation-cap] 教育背景]
 
         #cventry(
-            tl: "示例大学 计算机学院",
-            tr: "2022.09 - 2026.06（预计）",
+            tl: [示例大学 #text(size: 8.5pt, weight: "regular")[示例]],
+            tr: "2022.09 - 2026.06 ",
         )[
-          本科，计算机科学与技术（荣誉班）。#linebreak()
-          专业排名：1/120（前 1%） | 平均学分绩点：4.00/4.00。#linebreak()
-          获 2024-2025 学年度校长特别奖学金；入选校级「未来学者」计划。
+          本科，计算机学院，软件工程专业 #linebreak()
+          年级排名：12/180（6.67%） | 平均学分绩点：3.82/4.0 #linebreak()
+          学生工作：示例学院学生会技术部部长 #linebreak()
+          获得荣誉：示例一等奖学金、示例优秀学生干部、示例创新竞赛校级一等奖
         ]
     ],
     [],
   )
 
-  == #fa[#trophy] 荣誉与奖项
-
-    #cventry(
-        tl: "诺贝尔物理学奖",
-        tr: "2025 年",
-        compact: true,
-    )[]
-    #v(-0.2em)
-
-    #cventry(
-        tl: "ACM 图灵奖",
-        tr: "2024 年",
-        compact: true,
-    )[]
-    #v(-0.2em)
-
-    #cventry(
-        tl: "NeurIPS 最佳论文奖（两次）· ACL 最佳论文奖",
-        tr: "2022 - 2023 年",
-        compact: true,
-    )[]
-    #v(-0.2em)
-
-    #cventry(
-        tl: "国际大学生程序设计竞赛（ICPC）全球总决赛金牌",
-        tr: "2022 年",
-        compact: true,
-    )[]
-    #v(-0.2em)
-
-    #cventry(
-        tl: "国际数学奥林匹克（IMO）满分金牌",
-        tr: "2021 年",
-        compact: true,
-    )[]
-
-  == #fa[#book] 代表性论文
-
-    #cventry(
-        tl: "Attention Is All You Need",
-        tr: "2017 · 第一作者",
-    )[
-      #list(
-        "提出完全基于注意力机制的 Transformer 架构，以自注意力替代循环与卷积结构，成为现代大语言模型的基础范式（演示数据）。",
-      )
-    ]
-
-    #cventry(
-        tl: "Deep Residual Learning for Image Recognition",
-        tr: "2016 · 第一作者",
-    )[
-      #list(
-        "提出残差学习框架与深度残差网络 ResNet，解决深层网络退化问题，支撑上百层网络的稳定训练（演示数据）。",
-      )
-    ]
-
-    #cventry(
-        tl: "Language Models are Few-Shot Learners",
-        tr: "2020 · 通讯作者",
-    )[
-      #list(
-        "系统验证大规模语言模型的少样本学习能力，推动「预训练 + 提示」研究范式（演示数据）。",
-      )
-    ]
-
-  == #fa[#flask] 科研与项目经历
-
-    #cventry(
-        tl: "通用智能体的对齐与安全研究",
-        tr: "2023.09 - 至今",
-    )[
-      #list(
-        "面向大规模智能体的价值对齐与可解释性，设计基于因果干预的行为审计框架，在模拟环境中将有害行为检出率提升至 99.9%（演示数据）。",
-        "相关工作获 NeurIPS 2023 最佳论文奖，并开源配套工具链（演示数据）。",
-      )
-    ]
-
-    #cventry(
-        tl: "神经网络缩放定律与训练动力学",
-        tr: "2021.03 - 2023.08",
-    )[
-      #list(
-        "通过上千组控制实验拟合损失与算力、参数量、数据量之间的幂律关系，为训练预算分配提供可预测模型（演示数据）。",
-      )
-    ]
-
   == #fa[#laptop.code] 专业技能
 
     #list(
-      "编程语言：Python、C++、Rust、Julia；深度学习框架：PyTorch、JAX、Transformers。",
-      "科研工具：LaTeX、Typst、NumPy、Pandas、WandB；工程能力：Git、Docker、Linux、MySQL。",
-      "语言能力：英语（托福 120）、日语（N1）；长期担任国际会议审稿人。",
-      "研究兴趣：大模型基础架构、训练动力学、安全对齐与可解释性。",
+      "编程基础：熟练使用 Python、C++、TypeScript、PyTorch 和 Vue 3，熟悉 SQL、Java、Linux、Git 与 Docker ",
+      "研究方向：多模态检索、视觉语言模型与智能体工作流 ",
+      "英语能力：CET-6 520（示例），能够阅读英文技术文档与论文 ",
     )
+
+  == #fa[#project-diagram] 个人项目
+
+    #cventry(
+        tl: "VisionBoard —— 多模态视频检索演示系统（Python + Vue 3） ",
+        tr: "2025.03 - 2025.09 ",
+    )[
+      #list(
+        "面向示例视频库构建语义检索原型，支持文本、图片与时间区间查询；在 1,200 段虚构视频上实现 Recall@5 82.4%（示例指标）。 ",
+        "设计关键帧抽取、CLIP 向量化与分段索引流程，将演示数据处理耗时由 18 分钟降至 6 分钟（模拟数据）。 ",
+        "实现视频播放器与检索面板联动，支持按人物、动作和场景过滤，并展示命中片段与时间戳。 ",
+        "基于 Docker Compose 提供一键启动环境，补充单元测试与接口文档，覆盖索引、查询和结果排序流程。 ",
+      )
+    ]
+
+  == #fa[#microscope] 科研项目
+
+    #cventry(
+        tl: "结构化视觉记忆的课程研究（示例） ",
+        tr: "2024.09 - 2025.06 ",
+    )[
+      #list(
+        "设计实体—状态—事件三层记忆结构，为视频片段维护人物、物体、动作与时间证据。 ",
+        "比较文本摘要、帧级向量和结构化记忆三种检索方案，并在示例数据集上记录召回率、时延和显存占用。 ",
+        "完成消融实验与错误分析，验证时间过滤和实体约束对复杂查询的改进（数据均为模拟）。 ",
+      )
+    ]
+
+  == #fa[#th.list] 竞赛经历
+
+    #cventry(
+        tl: "桌面机械臂视觉抓取演示项目 ",
+        tr: "2024.03 - 2024.08 ",
+    )[
+      #list(
+        "使用 RGB-D 相机和 YOLO 示例模型完成目标定位，在仿真环境中实现抓取流程；成功率、响应时延等均为示例数值。 ",
+      )
+    ]
+
+    #cventry(
+      tl: [#text(size: 10pt)[示例程序设计竞赛] #text(font: ("FangSong", "STFangsong", "SimSun"), weight: "regular", size: 10pt)[指导老师：示例教师 A ]],
+        tr: "2025 年，校级一等奖（示例） ",
+      compact: true,
+    )[]
+    #v(-0.2em)
+
+    #cventry(
+      tl: [#text(size: 10pt)[示例数学建模竞赛] #text(font: ("FangSong", "STFangsong", "SimSun"), weight: "regular", size: 10pt)[指导老师：示例教师 B ]],
+        tr: "2024 年，校级二等奖（示例） ",
+      compact: true,
+    )[]
+    #v(-0.2em)
+
+    #cventry(
+      tl: [#text(size: 10pt)[示例创新训练计划] #text(font: ("FangSong", "STFangsong", "SimSun"), weight: "regular", size: 10pt)[指导老师：示例教师 C ]],
+        tr: "2024 年，优秀结题（示例） ",
+      compact: true,
+    )[]
 
   == #fa[#user] 个人简介
 
-    数学与工程直觉兼备的研究型工程师，习惯用第一性原理拆解问题，乐于分享与协作。（本页为演示用虚构数据，不指向任何真实人物。）
-
-#v(0.6em)
-#align(center)[#text(size: 8pt, fill: gray)[— 演示用虚构数据 · Fictional sample data — 所示奖项与论文仅用于模板展示 —]]
+    具备良好的编程基础与项目实践习惯，能够独立完成资料检索、原型开发和结果复盘。乐于沟通与协作，对多模态检索和视觉语言模型保持长期兴趣。喜欢阅读、跑步与摄影。本页仅用于展示排版，所有个人信息、经历、奖项和指标均为虚构。

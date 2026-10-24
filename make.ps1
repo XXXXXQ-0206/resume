@@ -3,12 +3,10 @@
     Windows equivalent of the Makefile in this directory.
 
 .DESCRIPTION
-    This script mirrors the four rules of ./Makefile one-for-one:
+    Builds or cleans the resume and validates its required fonts:
 
-        resume-cn-submit.pdf <- resume-cn.typ  (--input level=submit)
-        resume-en-submit.pdf <- resume-en.typ  (--input level=submit)
-        resume-cn-post.pdf   <- resume-cn.typ  (--input level=post)
-        resume-en-post.pdf   <- resume-en.typ  (--input level=post)
+        resume-demo.pdf      <- resume-cn.typ, chicv.typ, fontawesome.typ,
+                                portrait, and bundled fonts
 
 .EXAMPLE
     ./make.ps1
@@ -23,10 +21,13 @@ $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath $PSScriptRoot
 
 $Targets = @(
-    @{ Output = 'resume-cn-submit.pdf'; Source = 'resume-cn.typ'; Level = 'submit' },
-    @{ Output = 'resume-en-submit.pdf'; Source = 'resume-en.typ'; Level = 'submit' },
-    @{ Output = 'resume-cn-post.pdf';  Source = 'resume-cn.typ'; Level = 'post' },
-    @{ Output = 'resume-en-post.pdf';  Source = 'resume-en.typ'; Level = 'post' }
+    @{ Output = 'resume-demo.pdf'; Source = 'resume-cn.typ' }
+)
+$RequiredFonts = @(
+    'SimSun'
+    'FangSong'
+    'STFangsong'
+    'Font Awesome 6 Free Solid'
 )
 
 function Invoke-Clean {
@@ -42,12 +43,19 @@ function Invoke-Build {
     if (-not (Get-Command typst -ErrorAction SilentlyContinue)) {
         throw 'typst not found on PATH'
     }
-    if (-not (Test-Path -LiteralPath 'resume-private\private_info.json')) {
-        throw 'resume-private/private_info.json is missing (resume-private is a git submodule)'
+
+    $availableFonts = & typst fonts --font-path fonts
+    if ($LASTEXITCODE -ne 0) {
+        throw 'failed to query installed fonts'
     }
+    $missingFonts = @($RequiredFonts | Where-Object { $_ -notin $availableFonts })
+    if ($missingFonts.Count -gt 0) {
+        throw "missing required font(s): $($missingFonts -join ', ')"
+    }
+
     foreach ($t in $Targets) {
-        Write-Host "typst compile $($t.Source) $($t.Output) --input level=$($t.Level) --font-path fonts"
-        & typst compile $t.Source $t.Output --input "level=$($t.Level)" --font-path fonts
+        Write-Host "typst compile $($t.Source) $($t.Output) --font-path fonts"
+        & typst compile $t.Source $t.Output --font-path fonts
         if ($LASTEXITCODE -ne 0) { throw "typst failed for $($t.Output)" }
     }
     Write-Host ''

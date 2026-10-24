@@ -1,23 +1,21 @@
-ifndef JOBS
-  JOBS := $(shell nproc)
-endif
-MAKEFLAGS += -j$(JOBS)
+PDF := resume-demo.pdf
+SOURCES := resume-cn.typ chicv.typ fontawesome.typ 证件照-黑.jpg fonts/FontAwesome6.otf
 
-.PHONY: all clean
+.PHONY: all clean check-fonts
 
-all: resume-cn-submit.pdf resume-en-submit.pdf resume-cn-post.pdf resume-en-post.pdf
+AVAILABLE_FONTS := $(shell typst fonts --font-path fonts)
+MISSING_FONTS := \
+	$(foreach font,SimSun FangSong STFangsong,$(if $(findstring $(font),$(AVAILABLE_FONTS)),,$(font))) \
+	$(if $(findstring Font Awesome 6 Free Solid,$(AVAILABLE_FONTS)),,Font Awesome 6 Free Solid)
+
+all: check-fonts $(PDF)
+
+check-fonts:
+	$(if $(strip $(MISSING_FONTS)),$(error Missing required fonts: $(MISSING_FONTS)))
+	@:
+
+$(PDF): $(SOURCES)
+	typst compile resume-cn.typ $@ --font-path fonts
 
 clean:
-	rm resume-cn-submit.pdf resume-en-submit.pdf resume-cn-post.pdf resume-en-post.pdf
-
-resume-cn-submit.pdf: resume-cn.typ chicv.typ
-	typst compile resume-cn.typ resume-cn-submit.pdf --input level=submit --font-path fonts
-
-resume-en-submit.pdf: resume-en.typ chicv.typ
-	typst compile resume-en.typ resume-en-submit.pdf --input level=submit --font-path fonts
-
-resume-cn-post.pdf: resume-cn.typ chicv.typ
-	typst compile resume-cn.typ resume-cn-post.pdf --input level=post --font-path fonts
-
-resume-en-post.pdf: resume-en.typ chicv.typ
-	typst compile resume-en.typ resume-en-post.pdf --input level=post --font-path fonts
+	rm -f $(PDF)

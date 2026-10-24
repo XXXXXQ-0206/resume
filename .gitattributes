@@ -1,13 +1,1 @@
-* text=auto
-
-*.typ text
-*.md text
-*.yml text
-*.json text
-Makefile text eol=lf
-*.ps1 text eol=crlf
-
-*.png binary
-*.jpg binary
-*.otf binary
 *.pdf binary
